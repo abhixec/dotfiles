@@ -1,0 +1,12 @@
+set number
+set autoindent
+set smarttab
+set mouse=a
+
+
+
+filetype plugin on
+
+syntax on
+
+colorscheme blacklight

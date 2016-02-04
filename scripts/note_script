@@ -1,0 +1,40 @@
+#!/usr/bin/bash
+PATH_TO_NOTES="$HOME"
+note(){
+vim  ~/.notes/$@
+}
+
+#note(){
+#vim -c hi\ Normal\ ctermbg=White\ ctermfg=Black  ~/.notes/$@
+#}
+nls(){
+ls -c ~/.notes/ | grep "$*"
+}
+
+nt(){
+echo $@ >> ~/.note
+}
+nr(){
+echo $#
+if [ $# -eq 2 ]; then
+mv ~/.notes/$1 ~/.notes/$2
+else
+echo "The note rename requires just 2 arguments \"original note name\" \"new note name\""
+fi
+
+}
+nsearch(){
+grep -inr "$*" ~/.notes/*
+}
+nall(){
+cat ~/.notes/*
+}
+ntoday(){
+find  ~/.notes/  -mtime -1 -type f -print 
+}
+nopen(){
+zenity --text-info --filename="$PATH_TO_NOTES/.notes/$*" &
+}
+nremove(){
+rm ~/.notes/$*
+}

@@ -1,0 +1,87 @@
+! Author: Abhinav
+! Note : need to document it ! 
+! vim:ft=xdefaults
+!Global
+font: "Inconsolata-g -10"
+
+! Xft Font Settings.
+Xft.dpi: 96
+Xft.antialias: True
+Xft.rgba: rgb
+Xft.hinting: True
+Xft.hintstyle: hintslight
+!Xft.hintstyle: 1
+
+urxvt.termName: rxvt-256color
+
+urxvt.urgentOnBell: True
+
+urxvt.iso9755: False
+urxvt.iso9755_52: False
+
+! Basic Appearance
+urxvt.background: Black
+urxvt.foreground: Grey
+
+! Some nice colors to soothe the eye. Lifted from a friendly person on the
+! Archlinux forum.
+#urxvt.color0: #000000
+#urxvt.color1: #D32A2F
+#urxvt.color2: #27DE3A
+#urxvt.color3: #CE5C00
+#urxvt.color4: #0066FF
+#urxvt.color5: #AC00FF
+#urxvt.color6: #208F93
+#urxvt.color7: #CCCCCC
+#urxvt.color8: #555753
+#urxvt.color9: #FF2963
+#urxvt.color10: #A4FF00
+#urxvt.color11: #FFC123
+#urxvt.color12: #46A4FF
+#urxvt.color13: #FF00BB
+#urxvt.color9: #23D9E0
+#urxvt.color15: #FFFFFF
+
+urxvt.transparent: True
+urxvt.fading: 30
+urxvt.shading: 20
+
+! Set some nice fonts.
+urxvt.font: \
+    xft:Inconsolata-g:style=g:pixelsize=12:autohint=true, \
+    xft:Inconsolata-g:style=g:pixelsize=12:autohint=true
+urxvt.boldFont: \
+    xft:Inconsolata-g:style=Bold:pixelsize=12:autohint=true, \
+    xft:Inconsolata-g:style=Bold:pixelsize=12:autohint=true
+urxvt.italicFont:
+    xft:Inconsolata-g:style=Italic:pixelsize=12:autohint=true, \
+    xft:Inconsolata-g:style=Italic:pixelsize=12:autohint=true
+urxvt.boldItalicFont: \
+    xft:Inconsolata-g:style=Bold:style=Italic:pixelsize=12:autohint=true, \
+    xft:Inconsolata-g:style=Bold:style=Italic:pixelsize=12:autohint=true
+
+! Custom scrolling behaviour
+urxvt.scrollBar: False
+urxvt.scrollBar_right: False
+urxvt.scrollStyle: plain
+urxvt.scrollTtyOutput: False
+urxvt.scrollWithBuffer: True
+urxvt.scrollTtyKeypress: True
+
+urxvt.saveLines: 12000
+
+! Settings for urxvt-perl-extensions.
+urxvt.perl-ext: default,matcher
+urxvt.matcher.button: 2
+urxvt.matcher.rend.0: Uline fg9
+urxvt.urlLauncher: chromium
+urxvt.searchable-scrollback: M-Tab
+
+urxvt.keysym.M-g: perl:matcher
+urxvt.keysym.M-l: perl:matcher:list
+
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+ 
+URxvt.iso14755: False
+ 
+URxvt.perl-ext-common: default,clipboard

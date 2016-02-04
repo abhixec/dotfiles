@@ -1,0 +1,9 @@
+set_java(){
+	export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+}
+cdd(){
+	pushd $*
+}
+
+export PATH=/usr/local/apache-maven-3.3.3/bin:$PATH
+

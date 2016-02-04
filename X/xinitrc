@@ -1,0 +1,20 @@
+#exec ck-launch-session startlxde
+#exec startxfce4
+#exec razor-session
+#exec ck-launch-session mate-session
+#exec awesome
+#exec dwm
+#xsetroot -cursor_name left_ptr
+
+xscreensaver -no-splash &
+
+urxvtd -q -o -f 
+
+#xwrits +clock +breakclock +idle +top typetime=55 break=5 after=10 -multiply break=7 &
+
+nitrogen --restore
+
+unclutter -idle 5 -noevents -root &
+#automatically lock the screen using slock 
+xautolock -time 30 -locker slock &
+xmonad
