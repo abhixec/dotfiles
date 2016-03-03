@@ -1,5 +1,0 @@
----
-backends:
-    - pushover
-pushover:
-    user_key: umndCc2Cif9nQRi1Mq1SmqtA8DdHWR

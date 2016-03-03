@@ -1,0 +1,5 @@
+---
+backends:
+    - pushover
+pushover:
+    user_key: [ntfy token]
