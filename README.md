@@ -6,3 +6,5 @@
 - vim- vim config files 
 - mac- mac terminal colors and helper scripts
 - newsbeuter-newsbeuter conf files 
+- raspberrypi - config files
+- tmux - tmux conf file
