@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+#set -ex
 MESSAGE=$(~/whatismyip.py) 
 if ! [ -f ~/.my.ip ]; then
   echo $MESSAGE > ~/.my.ip
@@ -9,5 +9,6 @@ else
 	:
   else
     /usr/local/bin/ntfy send  $MESSAGE
+    echo $MESSAGE > ~/.my.ip 
   fi
 fi
