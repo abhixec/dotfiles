@@ -1,4 +1,4 @@
-#abhixec's etc files
+#abhixec's dot files
 ##Directory Listing
 - X- Contains xinitrc and Xdefaults file
 - Xmonad- Contains xmonad.hs and xmobarrc config files
