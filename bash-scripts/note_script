@@ -1,7 +1,16 @@
 #!/usr/bin/bash
 PATH_TO_NOTES="$HOME"
 note(){
-vim  ~/.notes/$@
+if [ $# -eq 1 ]; then
+vim ~/.notes/$@
+else
+if [ -d ~/.notes/$1 ]; then
+ :
+else
+mkdir ~/.notes/$1
+fi
+vim ~/.notes/$1/$2
+fi
 }
 
 #note(){
@@ -15,7 +24,7 @@ nt(){
 echo $@ >> ~/.note
 }
 nr(){
-echo $#
+Echo $#
 if [ $# -eq 2 ]; then
 mv ~/.notes/$1 ~/.notes/$2
 else

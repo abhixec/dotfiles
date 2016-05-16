@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BackgroundBlur</key>
+	<real>0.74770642201834869</real>
+	<key>BackgroundColor</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKMHCA9VJG51bGzTCQoLDA0OVU5TUkdCXE5TQ29sb3JTcGFjZVYkY2xhc3NPEBww
+	IDAuMTk5MDE1MjE5NyAwLjUyMjUwMjQ5MzQAEAGAAtIQERITWiRjbGFzc25hbWVYJGNs
+	YXNzZXNXTlNDb2xvcqISFFhOU09iamVjdF8QD05TS2V5ZWRBcmNoaXZlctEXGFRyb290
+	gAEIERojLTI3O0FITltigYOFipWepqmyxMfMAAAAAAAAAQEAAAAAAAAAGQAAAAAAAAAA
+	AAAAAAAAAM4=
+	</data>
+	<key>Font</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGGBlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKQHCBESVSRudWxs1AkKCwwNDg8QVk5TU2l6ZVhOU2ZGbGFnc1ZOU05hbWVWJGNs
+	YXNzI0AsAAAAAAAAEBCAAoADXxASVWJ1bnR1TW9uby1SZWd1bGFy0hMUFRZaJGNsYXNz
+	bmFtZVgkY2xhc3Nlc1ZOU0ZvbnSiFRdYTlNPYmplY3RfEA9OU0tleWVkQXJjaGl2ZXLR
+	GhtUcm9vdIABCBEaIy0yNzxCS1JbYmlydHZ4jZKdpq2wucvO0wAAAAAAAAEBAAAAAAAA
+	ABwAAAAAAAAAAAAAAAAAAADV
+	</data>
+	<key>FontAntialias</key>
+	<true/>
+	<key>FontWidthSpacing</key>
+	<integer>1</integer>
+	<key>ProfileCurrentVersion</key>
+	<real>2.04</real>
+	<key>TextColor</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKMHCA9VJG51bGzTCQoLDA0OVU5TUkdCXE5TQ29sb3JTcGFjZVYkY2xhc3NPEBww
+	LjcxNDQ3Njc5OTIgMC43NTg3MDAyODQxIDEAEAGAAtIQERITWiRjbGFzc25hbWVYJGNs
+	YXNzZXNXTlNDb2xvcqISFFhOU09iamVjdF8QD05TS2V5ZWRBcmNoaXZlctEXGFRyb290
+	gAEIERojLTI3O0FITltigYOFipWepqmyxMfMAAAAAAAAAQEAAAAAAAAAGQAAAAAAAAAA
+	AAAAAAAAAM4=
+	</data>
+	<key>name</key>
+	<string>Basic 1</string>
+	<key>type</key>
+	<string>Window Settings</string>
+</dict>
+</plist>
