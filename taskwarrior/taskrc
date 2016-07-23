@@ -1,0 +1,36 @@
+# [Created by task 2.4.2 5/24/2015 20:23:51]
+# Taskwarrior program configuration file.
+# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
+
+# Here is an example of entries that use the default, override and blank values
+#   variable=foo   -- By specifying a value, this overrides the default
+#   variable=      -- By specifying no value, this means no default
+#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+data.location=~/.task
+
+# Color theme (uncomment one to use)
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/light-16.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/light-256.theme
+include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-16.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-red-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-green-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-blue-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-violets-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-yellow-green.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-gray-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/dark-gray-blue-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/solarized-dark-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/solarized-light-256.theme
+#include /usr/local/Cellar/task/2.4.2/share/doc/task/rc/no-color.theme
+
+taskd.server=raspberrypi:53589
+taskd.certificate=\/Users\/abhinav\/.task\/abhinav_gopalakrishnan.cert.pem
+taskd.key=\/Users\/abhinav\/.task\/abhinav_gopalakrishnan.key.pem
+taskd.ca=\/Users\/abhinav\/.task\/ca.cert.pem
+taskd.credentials=Public\/Abhinav Gopalakrishnan\/99f7eff1-261c-4a63-94d6-1ac38d61dfbf
