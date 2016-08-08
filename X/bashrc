@@ -1,0 +1,6 @@
+alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-security"
+alias vimd="vim directory.md"
+alias rm="rm -i"
+alias repos="cd ~/git-repos"
+alias ":r"="source ~/.bashrc"
+source /Users/abhinav/git-repos/dotfiles/bash-scripts/note_script
