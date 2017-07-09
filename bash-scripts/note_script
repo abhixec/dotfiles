@@ -1,23 +1,28 @@
 #!/usr/bin/bash
 PATH_TO_NOTES="$HOME"
+
+# Function to create note
 note(){
 if [ $# -eq 1 ]; then
-vim ~/.notes/$@
+if [ $@ = "scratch" ]; then
+vim -c hi\ Normal\ ctermbg=White\ ctermfg=Black $PATH_TO_NOTES/$@$(date +"%m%d%y")
+elif [ $@ = "daily" ]; then
+vim $-c hi\ Normal\ ctermbg=White\ ctermfg=Black PATH_TO_NOTES/daily/$(date +"%m%d%y")
 else
-if [ -d ~/.notes/$1 ]; then
+vim -c hi\ Normal\ ctermbg=White\ ctermfg=Black $PATH_TO_NOTES/$@
+fi
+else
+if [ -d $PATH_TO_NOTES/$1 ]; then
  :
 else
-mkdir ~/.notes/$1
+mkdir $PATH_TO_NOTES/$1
 fi
-vim ~/.notes/$1/$2
+vim -c hi\ Normal\ ctermbg=White\ ctermfg=Black $PATH_TO_NOTES/$1/$2
 fi
 }
 
-#note(){
-#vim -c hi\ Normal\ ctermbg=White\ ctermfg=Black  ~/.notes/$@
-#}
 nls(){
-ls -c ~/.notes/ | grep "$*"
+ls -c $PATH_TO_NOTES/ | grep "$*"
 }
 
 nt(){
@@ -26,24 +31,41 @@ echo $@ >> ~/.note
 nr(){
 Echo $#
 if [ $# -eq 2 ]; then
-mv ~/.notes/$1 ~/.notes/$2
+mv $PATH_TO_NOTES/$1 $PATH_TO_NOTES/$2
 else
 echo "The note rename requires just 2 arguments \"original note name\" \"new note name\""
 fi
 
 }
 nsearch(){
-grep -inr "$*" ~/.notes/*
+grep -inr "$*" $PATH_TO_NOTES/*
 }
 nall(){
-cat ~/.notes/*
+cat $PATH_TO_NOTES/*
 }
 ntoday(){
-find  ~/.notes/  -mtime -1 -type f -print 
+find  $PATH_TO_NOTES/  -mtime -1 -type f -print 
 }
 nopen(){
 zenity --text-info --filename="$PATH_TO_NOTES/.notes/$*" &
 }
 nremove(){
-rm ~/.notes/$*
+rm $PATH_TO_NOTES/$*
+}
+
+findnote(){
+find $PATH_TO_NOTES/ -type f -name $1
+}
+
+personal(){
+if [ $# -eq 1 ]; then
+vim ~/.personal/$@
+else
+if [ -d ~/.personal/$1 ]; then
+ :
+else
+mkdir ~/.personal/$1
+fi
+vim ~/.personal/$1/$2
+fi
 }

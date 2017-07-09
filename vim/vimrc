@@ -2,11 +2,11 @@ set number
 set autoindent
 set smarttab
 set mouse=a
+set backspace=indent,eol, start 
 
-
-
+" Set file type plugin
 filetype plugin on
-
+" Turn syntax highlighting on
 syntax on
-
+" Color scheme
 colorscheme blacklight

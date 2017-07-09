@@ -1,0 +1,53 @@
+alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-security"
+alias vimd="vim directory.md"
+alias rm="rm -i"
+alias repos="cd ~/git-repos"
+alias ":r"="source ~/.bashrc"
+alias re="source ~/.script.sh"
+alias firefoxdev="open -a /Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox $1"
+alias firefoxp="/Applications/Firefox.app/Contents/MacOS/firefox-bin -P"
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias in='task add +in'
+alias work='task add +work'
+alias tick=tickle
+alias think='tickle +1d'
+alias ts='task start'
+alias ct="task sync && clear && task list"
+alias dailynotes="vim ~/.personal/dailylist"
+alias td="todo.sh"
+alias mux="tmuxinator"
+alias lab="pushd ~/.lab"
+
+## a quick way to get out of current directory ##
+alias ..='cd ..' 
+alias ...='cd ../../../' 
+alias ....='cd ../../../../' 
+alias .....='cd ../../../../' 
+alias .4='cd ../../../../' 
+alias .5='cd ../../../../..'
+
+## Colorize the grep command output for ease of use (good for log files)##
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias bc='bc -l'
+alias diff='colordiff'
+alias h='history'
+alias now='date +"%T"'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+alias rc='vim ~/.bashrc'
+alias scratch="note scratch"
+alias spad="note scratchpad"
+alias SD="tee ~/.scratch"
+alias notes="cd ~/.notes"
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# Hide desktop items
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias badge='tput bel'
+alias f='open -a Finder ./' 
+
+alias server="ssh abhinav@45.33.57.107" 

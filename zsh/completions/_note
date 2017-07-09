@@ -1,0 +1,3 @@
+#compdef note
+
+_values 'note files' ~/.notes/*(:t)

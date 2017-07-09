@@ -1,0 +1,10 @@
+#!/bin/bash
+function companylist(){
+RESUME_LOCATION="$HOME/Documents/Resume/Resume Latest/"
+RESUME_LATEST=$(find "$RESUME_LOCATION" -type d | tail -n1)
+echo $RESUME_LATEST
+#vim $RESUME_LATEST/company
+}
+
+#eval "$(fasd --init auto)" # FASD tool
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # Fuzzy finder

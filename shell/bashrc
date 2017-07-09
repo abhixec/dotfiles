@@ -1,0 +1,32 @@
+export TERM="screen-256color"
+export EDITOR="vim"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+set +o vi
+
+# ================================ #
+# History and AUtofill             #
+# ================================ #
+# don't put duplicate lines in the history.
+export HISTCONTROL=ignoredups:ignorespace:erasedups
+
+HISTSIZE=1000
+HISTFILESIZE=1000
+
+shopt -s histappend # append to the history
+shopt -s nocaseglob 
+shopt -s checkwinsize
+# =========================== #
+# Load the settings           #
+# =========================== #
+#source /Users/abhinav/git-repos/dotfiles/bash-scripts/note_script
+for SETTING in java git tmux mac emacs task nginx vim python ssh; do
+   [[ ! -f ~/.bash_$SETTING ]] || source ~/.bash_$SETTING
+done
+
+# ========================== #
+# Load the alias file        #
+# ========================== #
+source ~/.alias
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

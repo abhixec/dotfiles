@@ -1,0 +1,39 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=100000
+SAVEHIST=100000
+setopt appendhistory autocd extendedglob nomatch notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/abhinav/.zshrc'
+
+D=~/git-repos/dotfiles
+
+# ZSH related files #
+Z=~/.zsh
+[ -f $Z/zle.zsh ] && source $Z/zle.zsh
+[ -f $Z/options.zsh ] && source $Z/options.zsh
+[ -f $Z/aliases.zsh ] && source $Z/aliases.zsh
+[ -f $Z/environment.zsh ] && source $Z/environment.zsh
+[ -f $Z/functions.zsh ] && source $Z/functions.zsh
+[ -f $Z/prompt.zsh ] && source $Z/prompt.zsh
+[ -f $Z/completion.zsh ] && source $Z/completion.zsh
+
+# Set up some colors for directory listings.
+if (( C == 256 )); then
+	source $Z/ls_colors_256.zsh
+fi
+
+# Source the alias file 
+[ -f $D/bash-scripts/alias ] && source $D/bash-scripts/alias
+
+# Source the note script 
+[ -f $D/bash-scripts/note_script ] && source $D/bash-scripts/note_script
+
+# Source script file if it exists
+[ -f ~/.script.sh ] && source ~/.script.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
