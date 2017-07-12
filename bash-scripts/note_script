@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-PATH_TO_NOTES="$HOME"
+PATH_TO_NOTES="$HOME/.notes"
 
 # Function to create note
 note(){

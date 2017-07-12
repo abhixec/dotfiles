@@ -16,7 +16,7 @@ alias ts='task start'
 alias ct="task sync && clear && task list"
 alias dailynotes="vim ~/.personal/dailylist"
 alias td="todo.sh"
-alias mux="tmuxinator"
+#alias mux="tmuxinator"
 alias lab="pushd ~/.lab"
 
 ## a quick way to get out of current directory ##

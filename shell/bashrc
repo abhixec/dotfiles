@@ -27,6 +27,6 @@ done
 # ========================== #
 # Load the alias file        #
 # ========================== #
-source ~/.alias
+[ -f  ~/.alias ] && source  ~/.alias
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -12,6 +12,7 @@ D=~/git-repos/dotfiles
 
 # ZSH related files #
 Z=~/.zsh
+fpath=($Z/completions/ $fpath)
 [ -f $Z/zle.zsh ] && source $Z/zle.zsh
 [ -f $Z/options.zsh ] && source $Z/options.zsh
 [ -f $Z/aliases.zsh ] && source $Z/aliases.zsh
