@@ -1,13 +1,4 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=100000
-SAVEHIST=100000
-setopt appendhistory autocd extendedglob nomatch notify
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/abhinav/.zshrc'
-
+# Configuration for the z-shell
 D=~/git-repos/dotfiles
 
 # ZSH related files #
