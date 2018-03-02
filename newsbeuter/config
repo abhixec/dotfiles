@@ -1,8 +1,0 @@
-auto-reload yes
-always-display-description true
-reload-time 20
-browser "open -a /Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox"
-color listfocus blue black 
-color listfocus_unread blue black
-color info blue black 
-color listnormal_unread  red  black

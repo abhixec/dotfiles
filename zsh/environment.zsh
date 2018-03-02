@@ -10,7 +10,10 @@ bindkey -e
 zstyle :compinstall filename '/Users/abhinav/.zshrc'
 
 # Export PATH
-export PATH=~/.local/bin/:$PATH
+#export PATH=~/.local/bin/:$PATH
+
+#Export PATH 
+#export PATH=/usr/local/bin/:$PATH
 
 # Export PATH for rust
 export PATH=$HOME/.cargo/bin:$PATH

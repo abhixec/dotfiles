@@ -2,11 +2,33 @@ set number
 set autoindent
 set smarttab
 set mouse=a
-set backspace=indent,eol, start 
+set backspace=indent,eol,start 
 
-" Set file type plugin
+"Set Supported colors
+set t_Co=256
+
+"Set file type plugin
 filetype plugin on
-" Turn syntax highlighting on
+"Turn syntax highlighting on
 syntax on
-" Color scheme
-colorscheme blacklight
+
+"Display the line and column number
+set ruler
+
+"Set number of spaces for a tab
+set tabstop=4
+
+set smarttab
+set expandtab
+set shiftwidth=2
+set hidden
+
+"Set to show the status line
+set laststatus=2
+
+let g:elite_mode=1
+
+" Easyway to insert the time stamp by pressing the F3 button
+nnoremap <C-Tab> :tabnext<CR>
+nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
