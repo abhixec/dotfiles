@@ -46,6 +46,7 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Actions.UpdatePointer
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Layout.BoringWindows
+import XMonad.Actions.Minimize
 ---- Simple Float
 --import XMonad.Layout.SimpleFloat 
 import qualified XMonad.StackSet as W
@@ -64,7 +65,7 @@ myFocusFollowsMouse = True
 --
 myBorderWidth   = 1
 -- XMonad.Prompt Appearance
-myXPConfig = defaultXPConfig {
+myXPConfig = def {
    font = "xft:Envy Code R:pixelsize=14",
     fgHLight = "#FFCC00",
     bgHLight = "#000000",
@@ -78,7 +79,7 @@ myXPConfig = defaultXPConfig {
 
 
 -- XMonad.Layout.Tabbed appearance
-myTabTheme = defaultTheme {
+myTabTheme = def {
     fontName = "xft:Envy Code R:pixelsize=12",
     inactiveColor = "#333333",
     activeColor = "#00CCFF",
@@ -86,7 +87,7 @@ myTabTheme = defaultTheme {
 }
 
 -- XMobar pretty printing configuration
-myXMobarLogger handle = workspaceNamesPP defaultPP {
+myXMobarLogger handle = workspaceNamesPP def {
     ppOutput    = hPutStrLn handle,
     ppCurrent   = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>",
     ppUrgent    = \wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>",
@@ -126,9 +127,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
    -- [((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal xconfig)
 
     -- Goto Window
-    , ((modm .|. shiftMask, xK_g     ), windowPromptGoto $ defaultXPConfig {searchPredicate =isInfixOf})
-    , ((modm .|. shiftMask, xK_b     ), windowPromptBring defaultXPConfig)
+    -- deprecated
+    -- , ((modm .|. shiftMask, xK_g     ), windowPromptGoto $ def {searchPredicate =isInfixOf})
+    -- , ((modm .|. shiftMask, xK_b     ), windowPromptBring def)
     -- , ((modm .|. shiftMask, xK_g     ), windowPromptGoto defaultXPConfig { autoComplete = Just 500000 } )
+    , ((modm .|. shiftMask, xK_g ), windowPrompt def Goto wsWindows)
+    , ((modm .|. shiftMask, xK_b ), windowPrompt def Bring allWindows)
     -- close focused window
     , ((modm , xK_x     ), kill)
 
@@ -168,8 +172,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     ,((modm, xK_backslash), withFocused $ sendMessage . maximizeRestore) 
     -- Minimize
-    , ((modm,               xK_m     ),withFocused minimizeWindow  )
-    , ((modm .|. shiftMask, xK_m     ), sendMessage RestoreNextMinimizedWin)
+    , ((modm,               xK_m     ),withFocused minimizeWindow)
+    , ((modm .|. shiftMask, xK_m     ), withLastMinimized maximizeWindow)
     , ((modm .|. shiftMask, xK_n     ), clearBoring)
     , ((modm , xK_n     ), markBoring)
     -- Expand the master area
@@ -372,10 +376,10 @@ main :: IO ()
 -- No need to modify this.
 --
 main = do
---defaults = defaultConfig {
+--defaults = defConfig {
 
-	xmobarPipe <- spawnPipe "xmobar -x 1 ~/.xmobarrc"
-	xmonad $ defaultConfig {
+	xmobarPipe <- spawnPipe "xmobar -x 1 ~/.xmonad/xmobarrc"
+	xmonad $ docks def {
         -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
