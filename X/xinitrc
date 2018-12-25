@@ -6,6 +6,8 @@
 #exec dwm
 #xsetroot -cursor_name left_ptr
 
+source ~/repos/dotfiles/input/keyboard
+
 xscreensaver -no-splash &
 
 urxvtd -q -o -f 
