@@ -13,5 +13,6 @@
 - zsh - zsh scripts and configs
 
 ## Super User Spark cards
-x.sus - Install X configs
-newsboat.sus - Install newsboat config
+
+- x.sus - Install X configs
+- newsboat.sus - Install newsboat config
