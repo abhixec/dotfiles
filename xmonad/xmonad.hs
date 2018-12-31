@@ -36,7 +36,11 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.SetWMName
 
+import qualified XMonad.StackSet as W
+import XMonad.Util.NamedWindows
 import Data.Time.Format
 import Data.Time.LocalTime
 
@@ -59,9 +63,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
        , ((modm, xK_semicolon        ), do
                    date <- io $ liftM (formatTime defaultTimeLocale "[%Y-%m-%d %H:%M] ") getZonedTime
                    appendFilePrompt' myXPConfig (date ++) $ "/home/abhinav/.scratch")
+       , ((modm, xK_g                ), windowPrompt myXPConfig Goto wsWindows)
        , ((modm .|. shiftMask, xK_g  ), windowPrompt myXPConfig Goto allWindows)
        , ((modm .|. shiftMask, xK_b  ), windowPrompt myXPConfig Bring allWindows)
-       , ((modm .|. shiftMask, xK_x), runOrRaisePrompt myXPConfig)
+       , ((modm .|. shiftMask, xK_x  ), runOrRaisePrompt myXPConfig)
        , ((0,  xF86XK_MonBrightnessDown  ), spawn "xbacklight -dec 5")
        , ((0,  xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 5")
        , ((0,  xF86XK_AudioRaiseVolume  ), spawn "amixer  set Master 3%+")
@@ -102,6 +107,7 @@ myXMobarLogger handle = workspaceNamesPP def {
      ppTitle     = \wTitle -> "<fc=#92FF00>" ++ wTitle ++ "</fc>"
 } >>= dynamicLogWithPP
 
+
 -- Manage Hooks
 myManageHook = composeAll
     [ className =? "Gimp"          --> doFloat
@@ -110,16 +116,16 @@ myManageHook = composeAll
     ]
 
 -- Layouts
-myLayouts = avoidStruts $ maximize $ minimize $ boringWindows $ fullscreenFull ( myTile ||| Mirror myTile ||| Full ||| focused)
+myLayouts = avoidStruts $ maximize $ minimize $ boringWindows $ fullscreenFull ( myTile ||| Mirror myTile ||| Full ||| focused )
   where
       myTile = ResizableTall 1 (3/100) (1/2) []
       focused = gaps [(L,385), (R,385),(U,0),(D,10)]
-                                         $ noBorders (FS.fullscreenFull Full)  
+                                         $ noBorders (FS.fullscreenFull Full)
 
 -- Configuration
 main = do
      xmobarPipe <- spawnPipe "xmobar -x 1 ~/.xmonad/xmobarrc"     
-     xmonad $ docks def{
+     xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "blue", "-xs", "1"] } $ docks def{
        borderWidth        = 2
      , terminal		  = myTerminal
      , normalBorderColor  = myNormalBorderColor
@@ -131,5 +137,6 @@ main = do
      , handleEventHook    = fullscreenEventHook
      , logHook            = myXMobarLogger xmobarPipe
      , manageHook         = myManageHook
+     , startupHook        = setWMName "LG3D"
     
 }

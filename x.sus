@@ -1,0 +1,7 @@
+card installX {
+    into ~
+    {
+    X/Xdefaults -> .Xdefaults
+    X/xinitrc -> .xinitrc
+    }
+}

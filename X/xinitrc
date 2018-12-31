@@ -1,22 +1,26 @@
-#exec ck-launch-session startlxde
-#exec startxfce4
-#exec razor-session
-#exec ck-launch-session mate-session
-#exec awesome
-#exec dwm
 #xsetroot -cursor_name left_ptr
+source ~/repos/dotfiles/X/input/keyboard
 
-source ~/repos/dotfiles/input/keyboard
-
+# Start the screensaver
 xscreensaver -no-splash &
 
+# URXVT Daemon
 urxvtd -q -o -f 
 
+# Remind me to stretch my hands
 #xwrits +clock +breakclock +idle +top typetime=55 break=5 after=10 -multiply break=7 &
 
+# Disable the bell.
+xset b off 
+
+# Restore wallpaper
 nitrogen --restore
 
-unclutter -idle 5 -noevents -root &
+# Hide the mouse pointer
+unclutter --timeout 5 &
+
 #automatically lock the screen using slock 
 xautolock -time 30 -locker slock &
+
+# Start my favorite WM
 xmonad
