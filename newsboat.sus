@@ -1,0 +1,7 @@
+card newsboat {
+  into ~/.newsboat
+  outof newsboat
+
+  urls
+  config
+}
