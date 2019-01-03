@@ -22,5 +22,8 @@ unclutter --timeout 5 &
 #automatically lock the screen using slock 
 xautolock -time 30 -locker slock &
 
+# Set DISPLAY env variable, required for Dunst
+systemctl --user import-environment DISPLAY
+
 # Start my favorite WM
 xmonad
