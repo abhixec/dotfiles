@@ -379,7 +379,7 @@ main = do
 --defaults = defConfig {
 
 	xmobarPipe <- spawnPipe "xmobar -x 1 ~/.xmonad/xmobarrc"
-	xmonad $ docks def {
+	xmonad $  withUrgencyHook dzenUrgencyHook { args = ["-bg", "blue", "-xs", "1"] } $ docks def {
         -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
