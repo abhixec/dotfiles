@@ -59,7 +59,7 @@ altMask              = mod1Mask
 
 --Scratchpads
 scratchpads = [
-               NS "spad" "emacsclient -c ~/.notes/scratchpad" (title =? "scratchpad") defaultFloating,
+               NS "spad" "emacsclient -nc" (appName =? "emacs") defaultFloating,
 	       NS "terminal" "urxvtc -title 'floatingterm'" (title =? "floatingterm") defaultFloating
               ] 
 
