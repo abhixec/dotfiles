@@ -38,9 +38,12 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
+
 
 import qualified XMonad.StackSet as W
 import XMonad.Util.NamedWindows
+import XMonad.Util.NamedScratchpad
 import Data.Time.Format
 import Data.Time.LocalTime
 
@@ -51,14 +54,19 @@ myNormalBorderColor  = "#cccccc"
 myFocusedBorderColor = "#0000ff"
 myModMask= mod4Mask
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse  = True
+altMask              = mod1Mask
+
+--Scratchpads
+scratchpads = [
+               NS "spad" "emacsclient -nc ~/.notes/scratchpad" (title =? "scratchpad") defaultFloating
+              ] 
 
 -- My Key Combination
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
        [ ((modm .|. controlMask, xK_x), shellPrompt myXPConfig)
        , ((modm, xK_F3               ), xmonadPrompt myXPConfig)
        , ((modm, xK_c                ), spawn $ XMonad.terminal conf)
-       , ((modm, xK_x                ), kill)
        , ((0   , xK_Print            ), spawn "scrot")
        , ((modm, xK_semicolon        ), do
                    date <- io $ liftM (formatTime defaultTimeLocale "[%Y-%m-%d %H:%M] ") getZonedTime
@@ -85,6 +93,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
        , ((modm,               xK_k     ), focusUp  )
        , ((modm .|. shiftMask, xK_Return), focusMaster)
        , ((modm, xK_slash)          , warpToWindow 0.98 0.98)
+       , ((modm, xK_o)              , namedScratchpadAction scratchpads "spad")
        ]
 
 -- XMonad.Promp Apperance
@@ -125,7 +134,7 @@ myLayouts = avoidStruts $ maximize $ minimize $ boringWindows $ fullscreenFull (
 -- Configuration
 main = do
      xmobarPipe <- spawnPipe "xmobar -x 1 ~/.xmonad/xmobarrc"     
-     xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "blue", "-xs", "1"] } $ docks def{
+     xmonad $ ewmh $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "blue", "-xs", "1"] } $ docks def{
        borderWidth        = 2
      , terminal		  = myTerminal
      , normalBorderColor  = myNormalBorderColor
@@ -134,9 +143,9 @@ main = do
      , keys 		  = myKeys <+> keys def
      , layoutHook	  = trackFloating (myLayouts)
      , focusFollowsMouse  = myFocusFollowsMouse
-     , handleEventHook    = fullscreenEventHook
+     , handleEventHook    = handleEventHook def <+> FS.fullscreenEventHook
      , logHook            = myXMobarLogger xmobarPipe
-     , manageHook         = myManageHook
+     , manageHook         = (myManageHook) <+> (namedScratchpadManageHook scratchpads)
      , startupHook        = setWMName "LG3D"
     
 }

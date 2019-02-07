@@ -1,5 +1,5 @@
 # Configuration for the z-shell
-D=~/git-repos/dotfiles
+D=~/repos/dotfiles
 
 # ZSH related files #
 Z=~/.zsh
