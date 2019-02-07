@@ -59,7 +59,8 @@ altMask              = mod1Mask
 
 --Scratchpads
 scratchpads = [
-               NS "spad" "emacsclient -nc ~/.notes/scratchpad" (title =? "scratchpad") defaultFloating
+               NS "spad" "emacsclient -nc ~/.notes/scratchpad" (title =? "scratchpad") defaultFloating,
+	       NS "terminal" "urxtc" (title =? "urxvt") defaultFloating
               ] 
 
 -- My Key Combination
@@ -94,6 +95,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
        , ((modm .|. shiftMask, xK_Return), focusMaster)
        , ((modm, xK_slash)          , warpToWindow 0.98 0.98)
        , ((modm, xK_o)              , namedScratchpadAction scratchpads "spad")
+       , ((modm .|. shiftMask, xK_t), namedScratchpadAction scratchpads "terminal")
        ]
 
 -- XMonad.Promp Apperance
