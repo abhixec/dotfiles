@@ -59,7 +59,7 @@ altMask              = mod1Mask
 
 --Scratchpads
 scratchpads = [
-               NS "spad" "emacsclient -nc" (appName =? "emacs") defaultFloating,
+               NS "emacs" "emacsclient -nc" (appName =? "emacs") defaultFloating,
 	       NS "terminal" "urxvtc -title 'floatingterm'" (title =? "floatingterm") defaultFloating
               ] 
 
@@ -94,7 +94,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
        , ((modm,               xK_k     ), focusUp  )
        , ((modm .|. shiftMask, xK_Return), focusMaster)
        , ((modm, xK_slash)          , warpToWindow 0.98 0.98)
-       , ((modm, xK_o)              , namedScratchpadAction scratchpads "spad")
+       , ((modm, xK_o)              , namedScratchpadAction scratchpads "emacs")
        , ((modm .|. shiftMask, xK_t), namedScratchpadAction scratchpads "terminal")
        ]
 
