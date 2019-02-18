@@ -16,4 +16,7 @@ zstyle :compinstall filename '/Users/abhinav/.zshrc'
 #export PATH=/usr/local/bin/:$PATH
 
 # Export PATH for rust
-export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/.local/bin/:$PATH
+
+# Export XDG_CONFIG_HOME
+export XDG_CONFIG_HOME="$HOME/.config"
