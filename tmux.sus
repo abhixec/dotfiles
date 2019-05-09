@@ -1,0 +1,4 @@
+card tmux {
+ into ~
+ tmux/tmux.conf -> .tmux.conf
+}
