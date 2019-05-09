@@ -2,7 +2,7 @@
 ! Note : need to document it ! 
 ! vim:ft=xdefaults
 !Global
-font: "Inconsolata-g -10"
+font: "Iosevka-medium -12"
 
 ! Xft Font Settings.
 Xft.dpi: 96
@@ -42,23 +42,23 @@ urxvt.foreground: White
 #urxvt.color9: #23D9E0
 #urxvt.color15: #FFFFFF
 
-urxvt.transparent: True
+urxvt.transparent: False
 urxvt.fading: 30
 urxvt.shading: 20
 
 ! Set some nice fonts.
 urxvt.font: \
-    xft:Inconsolata-g:style=g:pixelsize=12:autohint=true, \
-    xft:Inconsolata-g:style=g:pixelsize=12:autohint=true
+    xft:iosevka-medium:style=g:pixelsize=14:autohint=true, \
+    xft:iosevka-medium:style=g:pixelsize=14:autohint=true
 urxvt.boldFont: \
-    xft:Inconsolata-g:style=Bold:pixelsize=12:autohint=true, \
-    xft:Inconsolata-g:style=Bold:pixelsize=12:autohint=true
+    xft:iosevka-medium:style=Bold:pixelsize=14:autohint=true, \
+    xft:iosevka-medium:style=Bold:pixelsize=14:autohint=true
 urxvt.italicFont:
-    xft:Inconsolata-g:style=Italic:pixelsize=12:autohint=true, \
-    xft:Inconsolata-g:style=Italic:pixelsize=12:autohint=true
+    xft:iosevka-medium:style=Italic:pixelsize=14:autohint=true, \
+    xft:iosveka-medium:style=Italic:pixelsize=14:autohint=true
 urxvt.boldItalicFont: \
-    xft:Inconsolata-g:style=Bold:style=Italic:pixelsize=12:autohint=true, \
-    xft:Inconsolata-g:style=Bold:style=Italic:pixelsize=12:autohint=true
+    xft:iosveka-medium:style=Bold:style=Italic:pixelsize=14:autohint=true, \
+    xft:iosveka-medium:style=Bold:style=Italic:pixelsize=14:autohint=true
 
 ! Custom scrolling behaviour
 urxvt.scrollBar: False

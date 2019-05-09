@@ -20,3 +20,6 @@ export PATH=$HOME/.cargo/bin:$HOME/.local/bin/:$PATH
 
 # Export XDG_CONFIG_HOME
 export XDG_CONFIG_HOME="$HOME/.config"
+
+# Export ZDOTDIR
+#export ZDOTDIR="$HOME/.zsh"

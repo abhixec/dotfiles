@@ -2,7 +2,7 @@
 source ~/repos/dotfiles/X/input/keyboard
 
 # Start the screensaver
-xscreensaver -no-splash &
+# xscreensaver -no-splash &
 
 # URXVT Daemon
 urxvtd -q -o -f 
@@ -21,6 +21,9 @@ unclutter --timeout 5 &
 
 #automatically lock the screen using slock 
 xautolock -time 30 -locker slock &
+
+#xss lock
+xss-lock -- slock &
 
 # Set DISPLAY env variable, required for Dunst
 systemctl --user import-environment DISPLAY

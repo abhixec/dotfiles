@@ -1,0 +1,6 @@
+card zshInstall {
+     into ~     
+	zsh/zshrc -> .zshrc
+	zsh -> .zsh
+	zsh/zlogin -> .zlogin
+}

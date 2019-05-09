@@ -1,0 +1,4 @@
+card emacs {
+     into ~/.emacs.d
+     emacs.d/init.el -> init.el
+}

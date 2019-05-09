@@ -30,7 +30,7 @@ import XMonad.Actions.WorkspaceNames
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.Minimize
 import XMonad.Actions.Warp
-
+import XMonad.Actions.CycleWS
 -- Hooks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageDocks
@@ -39,7 +39,6 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
-
 
 import qualified XMonad.StackSet as W
 import XMonad.Util.NamedWindows
@@ -54,13 +53,13 @@ myNormalBorderColor  = "#cccccc"
 myFocusedBorderColor = "#0000ff"
 myModMask= mod4Mask
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse  = True
+myFocusFollowsMouse  = False
 altMask              = mod1Mask
 
 --Scratchpads
 scratchpads = [
                NS "emacs" "emacsclient -nc" (appName =? "emacs") defaultFloating,
-	       NS "terminal" "urxvtc -title 'floatingterm'" (title =? "floatingterm") defaultFloating
+               NS "terminal" "urxvtc -title 'floatingterm'" (title =? "floatingterm") defaultFloating
               ] 
 
 -- My Key Combination
@@ -93,6 +92,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
        , ((modm,               xK_j     ), focusDown)
        , ((modm,               xK_k     ), focusUp  )
        , ((modm .|. shiftMask, xK_Return), focusMaster)
+       , ((modm, xK_grave), toggleWS' ["NSP"])
        , ((modm, xK_slash)          , warpToWindow 0.98 0.98)
        , ((modm, xK_o)              , namedScratchpadAction scratchpads "emacs")
        , ((modm .|. shiftMask, xK_t), namedScratchpadAction scratchpads "terminal")
@@ -121,9 +121,14 @@ myXMobarLogger handle = workspaceNamesPP def {
 
 -- Manage Hooks
 myManageHook = composeAll
-    [ className =? "Gimp"          --> doFloat
-    , resource =? "desktop_window" --> doIgnore
+    [
+    -- className =? "Gimp"          --> doFloat
+      resource =? "desktop_window" --> doIgnore
     , isFullscreen                 --> doFullFloat
+    , appName =? "galculator"    --> doFloat
+    , appName =? "speedcrunch" --> doFloat
+    , appName =? "xpad"            --> doFloat
+    , stringProperty "_NET_WM_NAME" =? "Emulator" --> doFloat
     ]
 
 -- Layouts
@@ -138,12 +143,12 @@ main = do
      xmobarPipe <- spawnPipe "xmobar -x 1 ~/.xmonad/xmobarrc"     
      xmonad $ ewmh $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "blue", "-xs", "1"] } $ docks def{
        borderWidth        = 2
-     , terminal		  = myTerminal
+     , terminal           = myTerminal
      , normalBorderColor  = myNormalBorderColor
      , focusedBorderColor = myFocusedBorderColor
-     , modMask 		  = myModMask
-     , keys 		  = myKeys <+> keys def
-     , layoutHook	  = trackFloating (myLayouts)
+     , modMask            = myModMask
+     , keys               = myKeys <+> keys def
+     , layoutHook         = trackFloating (myLayouts)
      , focusFollowsMouse  = myFocusFollowsMouse
      , handleEventHook    = handleEventHook def <+> FS.fullscreenEventHook
      , logHook            = myXMobarLogger xmobarPipe

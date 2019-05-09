@@ -1,0 +1,4 @@
+card notescard {
+  into ~
+  ~/repos/notes -> .notes
+}
