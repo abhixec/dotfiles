@@ -4,7 +4,8 @@ Config {
        , fgColor = "grey"
        , position = Top
        , lowerOnStart = True
-       , commands = [ Run Weather "KSJC" ["-t","<station>: <tempC>C","-L","37","-H","131","--normal","green","--high","red","--low","lightblue"] 36000
+       , commands = [
+       	 	    Run Weather "KSJC" ["-t","<station>: <tempC>C","-L","37","-H","131","--normal","green","--high","red","--low","lightblue"] 36000
                     , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
                     , Run DynNetwork ["-L","0","-H","32","--normal","green","--high","red"] 10
                     , Run Uptime ["-w", "2", "-c", "0", "-t", "up:<days>:<hours>:<minutes>"] 10
@@ -12,8 +13,7 @@ Config {
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
 		    , Run Battery  ["-t", "<left>%", "-L", "10", "-H", "80", "-p", "3", "--", "-O", "<fc=green>On</fc> - ", "-o", "", "-L", "-15", "-H", "-5", "-l", "red", "-m", "blue", "-h", "green"] 600
-  		    , Run StdinReader
-]
+  		    , Run StdinReader ]
        , sepChar = "%"
        , alignSep = "||"
        , template = "%StdinReader% || %uptime% | %cpu% | %memory% | %dynnetwork% || <fc=#ee9a00>%date%</fc>|%KSJC% | %uname% | %battery%" 

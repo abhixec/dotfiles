@@ -63,3 +63,6 @@ e.g. Sunday, September 17, 2000."
 
 ;;Remove the useless toolbar
 (tool-bar-mode -1)
+
+;; Remove C-z behavior for XMonad
+(global-unset-key (kbd "C-z"))
