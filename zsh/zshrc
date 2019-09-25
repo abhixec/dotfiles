@@ -4,13 +4,14 @@ D=~/repos/dotfiles
 # ZSH related files #
 Z=~/.zsh
 fpath=($Z/completions/ $fpath)
+[ -f $Z/functions.zsh ] && source $Z/functions.zsh 
 [ -f $Z/zle.zsh ] && source $Z/zle.zsh
 [ -f $Z/options.zsh ] && source $Z/options.zsh
 [ -f $Z/aliases.zsh ] && source $Z/aliases.zsh
 [ -f $Z/environment.zsh ] && source $Z/environment.zsh
-[ -f $Z/functions.zsh ] && source $Z/functions.zsh
 [ -f $Z/prompt.zsh ] && source $Z/prompt.zsh
 [ -f $Z/completion.zsh ] && source $Z/completion.zsh
+[ -f ~/.configs ] && source ~/.configs
 
 # Set up some colors for directory listings.
 if (( C == 256 )); then
