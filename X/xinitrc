@@ -28,5 +28,11 @@ xss-lock -- slock &
 # Set DISPLAY env variable, required for Dunst
 systemctl --user import-environment DISPLAY
 
+# Start pulse audio
+pulseaudio -D
+
+#x-on-resize
+x-on-resize --config ~/.monitor_script.sh --start &
+
 # Start my favorite WM
 xmonad
