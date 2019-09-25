@@ -1,7 +1,7 @@
 alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-security"
 alias vimd="vim directory.md"
 alias rm="rm -i"
-alias repos="cd ~/git-repos"
+alias repos="cd ~/repos"
 alias ":r"="source ~/.bashrc"
 alias re="source ~/.script.sh"
 alias firefoxdev="open -a /Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox $1"
