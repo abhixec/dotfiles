@@ -20,8 +20,10 @@ urxvt.iso9755: False
 urxvt.iso9755_52: False
 
 ! Basic Appearance
-urxvt.background: Black
-urxvt.foreground: White
+urxvt.background: #00182E
+#urxvt.foreground: #0083B4
+#urxvt.foreground: #0092DA
+urxvt.foreground: #00ABFF
 
 ! Some nice colors to soothe the eye. Lifted from a friendly person on the
 ! Archlinux forum.
@@ -74,7 +76,7 @@ urxvt.saveLines: 120000
 urxvt.perl-ext: default,matcher
 urxvt.matcher.button: 2
 urxvt.matcher.rend.0: Uline fg9
-urxvt.urlLauncher: firefox
+urxvt.url-launcher: firefox
 urxvt.searchable-scrollback: M-Tab
 
 urxvt.keysym.M-g: perl:matcher
