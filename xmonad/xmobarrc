@@ -1,12 +1,12 @@
 Config { 
   font = "xft:Envy Code R:pixelsize=10",
-       , bgColor = "black"
-         , fgColor = "grey"
-         , position = Top
-         , alpha   = 150,
+       , bgColor = "#2d2d2d"
+       , fgColor = "#cccccc"
+       , position = Top
+--     , alpha   = 150,
        , lowerOnStart = True
-         , commands = [
-         Run Weather "KSJC" ["-t","<station>: <tempC>C","-L","37","-H","131","--normal","green","--high","red","--low","lightblue"] 36000
+       , commands = [
+         Run Weather "KSJC" ["-t","<station>: <tempC>C","-L","37","-H","131","--normal","green","--high","red","--low","#5183FF"] 36000
            , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
            , Run DynNetwork ["-L","0","-H","32","--normal","green","--high","red"] 10
            , Run Wireless "wlp0s20f3" [] 10
@@ -15,8 +15,9 @@ Config {
            , Run Com "uname" ["-s","-r"] "" 36000
            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
            , Run Battery  ["-t", "<left>%", "-L", "10", "-H", "80", "-p", "3", "--", "-O", "<fc=green>On</fc> - ", "-o", "", "-L", "-15", "-H", "-5", "-l", "red", "-m", "blue", "-h", "green"] 600
+	   , Run Volume "default" "Master" [] 10
            , Run StdinReader ]
            , sepChar = "%"
            , alignSep = "||"
-           , template = "%StdinReader% || %uptime% | %cpu% | %memory% | %dynnetwork% || <fc=#ee9a00>%date%</fc>| %KSJC% | %uname% | %wlp0s20f3wi% | %battery%" 
+           , template = "%StdinReader% ||  %uptime% | %cpu% | %memory% | %dynnetwork% || <fc=#66cccc>%date%</fc>| %KSJC% | %uname% | %wlp0s20f3wi% | %default:Master% |%battery%"  
 }
