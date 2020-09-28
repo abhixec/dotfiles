@@ -9,6 +9,7 @@ import XMonad.Prompt.XMonad
 import XMonad.Prompt.AppendFile
 import XMonad.Prompt.Window
 import XMonad.Prompt.RunOrRaise
+import XMonad.Prompt.FuzzyMatch
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Run
@@ -24,6 +25,16 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 import XMonad.Layout.TrackFloating
 import XMonad.Layout.BoringWindows
+import XMonad.Layout.Tabbed 
+import XMonad.Layout.ThreeColumns
+
+-- Testing stuff
+import XMonad.Layout.Accordion (Accordion(..))
+import XMonad.Layout.Reflect (reflectVert)
+import XMonad.Layout.TwoPane (TwoPane(..))
+import XMonad.Layout.Master (mastered)
+import XMonad.Layout.Spacing (Border(..), spacingRaw)
+import XMonad.Layout.CenteredMaster
 
 -- Actions
 import XMonad.Actions.WorkspaceNames
@@ -31,6 +42,10 @@ import XMonad.Actions.UpdatePointer
 import XMonad.Actions.Minimize
 import XMonad.Actions.Warp
 import XMonad.Actions.CycleWS
+
+import qualified XMonad.Layout.Spacing as Spacing
+import qualified XMonad.Layout.BinarySpacePartition as BSP
+import XMonad.Layout.BinarySpacePartition
 -- Hooks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageDocks
@@ -45,7 +60,7 @@ import XMonad.Util.NamedWindows
 import XMonad.Util.NamedScratchpad
 import Data.Time.Format
 import Data.Time.LocalTime
-
+import Data.List
 
 -- Global Variables
 myTerminal           = "urxvtc"
@@ -56,14 +71,16 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse  = False
 altMask              = mod1Mask
 
+--Rofi
+launcherString = "rofi -combi-modi window,drun,ssh,run -show combi -modi combi -show drun -show-icons -drun-icon-theme -matching fuzzy -theme android_notification"
 --Scratchpads
 scratchpads = [
-               NS "emacs" "emacsclient -nc" (appName =? "emacs") defaultFloating,
+               NS "emacs" "emacsclient -nc --frame-parameters='(quote (name . \"floatingemacs\"))'" (title =? "floatingemacs") defaultFloating,
                NS "terminal" "urxvtc -title 'floatingterm'" (title =? "floatingterm") defaultFloating
               ] 
 
 -- My Key Combination
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
+myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ 
        [ ((modm .|. controlMask, xK_x), shellPrompt myXPConfig)
        , ((modm, xK_F3               ), xmonadPrompt myXPConfig)
        , ((modm, xK_c                ), spawn $ XMonad.terminal conf)
@@ -75,28 +92,40 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
        , ((modm .|. shiftMask, xK_g  ), windowPrompt myXPConfig Goto allWindows)
        , ((modm .|. shiftMask, xK_b  ), windowPrompt myXPConfig Bring allWindows)
        , ((modm .|. shiftMask, xK_x  ), runOrRaisePrompt myXPConfig)
-       , ((0,  xF86XK_MonBrightnessDown  ), spawn "xbacklight -dec 5")
-       , ((0,  xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 5")
+       , ((0,  xF86XK_MonBrightnessDown  ), spawn "xbacklight -dec 10")
+       , ((0,  xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 10")
        , ((0,  xF86XK_AudioRaiseVolume  ), spawn "amixer  set Master 3%+")
        , ((0,  xF86XK_AudioLowerVolume  ), spawn "amixer  set Master 3%-")
        , ((0,  xF86XK_AudioMute         ), spawn "amixer  set Master toggle")
+       , ((0,  xF86XK_AudioMicMute      ), spawn "amixer set Capture toggle")
        , ((modm .|. shiftMask, xK_F11)   , safeSpawn "slock" [])
        , ((modm , xK_backslash)          , withFocused (sendMessage . maximizeRestore ))
-       , ((modm,               xK_a     ), sendMessage MirrorShrink)
-       , ((modm,               xK_z     ), sendMessage MirrorExpand)
+       , ((modm,               xK_n     ), sendMessage MirrorShrink)
+       , ((modm,               xK_o     ), sendMessage MirrorExpand)
        , ((modm, xK_v                   ), sendMessage $ ToggleStruts)
        , ((modm,               xK_m     ), withFocused minimizeWindow)
        , ((modm .|. shiftMask, xK_m     ), withLastMinimized maximizeWindow)
        , ((modm .|. shiftMask, xK_n     ), clearBoring)
        , ((modm, xK_b     )              , markBoring)
-       , ((modm,               xK_j     ), focusDown)
-       , ((modm,               xK_k     ), focusUp  )
+       , ((modm,               xK_i     ), focusDown)
+       , ((modm,               xK_e     ), focusUp  )
+       , ((modm .|. shiftMask, xK_e     ), windows W.swapUp   )
+       , ((modm .|. shiftMask, xK_i     ), windows W.swapDown )
        , ((modm .|. shiftMask, xK_Return), focusMaster)
        , ((modm, xK_grave), toggleWS' ["NSP"])
        , ((modm, xK_slash)          , warpToWindow 0.98 0.98)
-       , ((modm, xK_o)              , namedScratchpadAction scratchpads "emacs")
+       , ((modm, xK_s)              , namedScratchpadAction scratchpads "emacs")
        , ((modm .|. shiftMask, xK_t), namedScratchpadAction scratchpads "terminal")
+       -- Use arrows to move to workspaces next and previous
+       , ((modm, xK_Right), nextWS)
+       , ((modm, xK_Left), prevWS)
+       , ((modm .|. shiftMask, xK_o), withFocused centerWindow)
+       , ((modm, xK_p), spawn launcherString)
        ]
+       ++
+        [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_w, xK_f, xK_r] [0..]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -- XMonad.Promp Apperance
 myXPConfig = def {
@@ -106,18 +135,46 @@ myXPConfig = def {
     bgColor = "#000000",
     borderColor = "#222222",
     height = 24,
-    historyFilter = deleteConsecutive
+    historyFilter = deleteConsecutive,
+    searchPredicate = fuzzyMatch
 }
+-- Center float
+centerWindow :: Window -> X ()
+centerWindow win = do
+    (_, W.RationalRect x y w h) <- floatLocation win
+    windows $ W.float win (W.RationalRect ((1 - w) / 2) ((1 - h) / 2) w h)
+    return ()
+
+-- If the window is floating then (f), if tiled then (n)
+floatOrNot f n = withFocused $ \windowId -> do
+                             floats <- gets (W.floating . windowset);
+                             if windowId `M.member` floats -- if the current window is floating...
+                               then f
+			       else n
+
+-- Get the windows in the current workspace
+windowCount :: X String
+windowCount = gets $ show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+
+--Float
+toggleFloat = floatOrNot (withFocused $ windows . W.sink) (withFocused centerWindow)
 
 -- XMobar Pretty printing configuration
-myXMobarLogger handle = workspaceNamesPP def {
-     ppOutput    = hPutStrLn handle,
-     ppCurrent   = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>",
-     ppUrgent    = \wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>",
-     ppSep       = " | ",
-     ppTitle     = \wTitle -> "<fc=#92FF00>" ++ wTitle ++ "</fc>"
-} >>= dynamicLogWithPP
+myXMobarLogger handle = do
+ winCount <- windowCount
+ workspaceNamesPP def {
+    ppOutput    = hPutStrLn handle,
+    ppCurrent   = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "](" ++ winCount ++")</fc>",
+    ppUrgent    = \wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>",
+    ppSep       = " | ",
+    ppTitle     = \wTitle -> "<fc=#9076FF>" ++ wTitle ++ "</fc>"
+   } >>= dynamicLogWithPP
 
+-- IntelliJ fix
+(~=?) :: Eq a => Query [a] -> [a] -> Query Bool
+q ~=? x = fmap (isInfixOf x) q
+
+manageIdeaCompletionWindow = (className =? "jetbrains-studio") <&&> (title ~=? "win") --> doIgnore
 
 -- Manage Hooks
 myManageHook = composeAll
@@ -125,6 +182,7 @@ myManageHook = composeAll
     -- className =? "Gimp"          --> doFloat
       resource =? "desktop_window" --> doIgnore
     , isFullscreen                 --> doFullFloat
+    , isDialog                     --> doFloat
     , appName =? "galculator"    --> doFloat
     , appName =? "speedcrunch" --> doFloat
     , appName =? "xpad"            --> doFloat
@@ -132,8 +190,12 @@ myManageHook = composeAll
     ]
 
 -- Layouts
-myLayouts = avoidStruts $ maximize $ minimize $ boringWindows $ fullscreenFull ( myTile ||| Mirror myTile ||| Full ||| focused )
+myLayouts = avoidStruts $ maximize $ minimize $ boringWindows $ fullscreenFull ( myTile ||| Mirror myTile ||| Full ||| focused ||| ThreeColMid 1 (3/100) (1/2) ||| simpleTabbed ||| TwoPane(3/100)(1/2))
   where
+      uniformBorder n = Border n n n n
+      spacing = spacingRaw False (uniformBorder 0) False (uniformBorder 10) True
+--      twoCols    = spacing $ mastered (1/100) (1/2) Accordion
+
       myTile = ResizableTall 1 (3/100) (1/2) []
       focused = gaps [(L,385), (R,385),(U,0),(D,10)]
                                          $ noBorders (FS.fullscreenFull Full)
@@ -152,7 +214,7 @@ main = do
      , focusFollowsMouse  = myFocusFollowsMouse
      , handleEventHook    = handleEventHook def <+> FS.fullscreenEventHook
      , logHook            = myXMobarLogger xmobarPipe
-     , manageHook         = (myManageHook) <+> (namedScratchpadManageHook scratchpads)
+     , manageHook         = (myManageHook) <+> (namedScratchpadManageHook scratchpads) <+> manageIdeaCompletionWindow
      , startupHook        = setWMName "LG3D"
     
 }

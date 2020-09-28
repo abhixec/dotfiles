@@ -12,7 +12,7 @@ Xft.hinting: True
 Xft.hintstyle: hintslight
 !Xft.hintstyle: 1
 
-urxvt.termName: rxvt-256color
+urxvt.termName: rxvt-unicode-256color
 
 urxvt.urgentOnBell: True
 
@@ -20,67 +20,59 @@ urxvt.iso9755: False
 urxvt.iso9755_52: False
 
 ! Basic Appearance
-urxvt.background: #00182E
-#urxvt.foreground: #0083B4
-#urxvt.foreground: #0092DA
-urxvt.foreground: #00ABFF
+urxvt.foreground: #0491FF
+!urxvt.foreground: #0083B4, #241700, #001425
+!urxvt.foreground: #0092DA, #008EFF
+urxvt.background: #031D22
 
-! Some nice colors to soothe the eye. Lifted from a friendly person on the
-! Archlinux forum.
-#urxvt.color0: #000000
-#urxvt.color1: #D32A2F
-#urxvt.color2: #27DE3A
-#urxvt.color3: #CE5C00
-#urxvt.color4: #0066FF
-#urxvt.color5: #AC00FF
-#urxvt.color6: #208F93
-#urxvt.color7: #CCCCCC
-#urxvt.color8: #555753
-#urxvt.color9: #FF2963
-#urxvt.color10: #A4FF00
-#urxvt.color11: #FFC123
-#urxvt.color12: #46A4FF
-#urxvt.color13: #FF00BB
-#urxvt.color9: #23D9E0
-#urxvt.color15: #FFFFFF
+urxvt.color0: #000000
+urxvt.color1: #D32A2F
+urxvt.color2: #27DE3A
+urxvt.color3: #CE5C00
+urxvt.color4: #0066FF
+urxvt.color5: #AC00FF
+urxvt.color6: #208F93
+urxvt.color7: #CCCCCC
+urxvt.color8: #555753
+urxvt.color9: #FF2963
+urxvt.color10: #A4FF00
+urxvt.color11: #FFC123
+urxvt.color12: #46A4FF
+urxvt.color13: #FF00BB
+urxvt.color14: #23D9E0
+urxvt.color15: #FFFFFF
 
 urxvt.transparent: False
 urxvt.fading: 30
 urxvt.shading: 20
+urxvt.cursorBlink: true
+urxvt.cursorUnderline: true
 
 ! Set some nice fonts.
-urxvt.font: \
-    xft:iosevka-medium:style=g:pixelsize=14:autohint=true, \
-    xft:iosevka-medium:style=g:pixelsize=14:autohint=true
-urxvt.boldFont: \
-    xft:iosevka-medium:style=Bold:pixelsize=14:autohint=true, \
-    xft:iosevka-medium:style=Bold:pixelsize=14:autohint=true
-urxvt.italicFont:
-    xft:iosevka-medium:style=Italic:pixelsize=14:autohint=true, \
-    xft:iosveka-medium:style=Italic:pixelsize=14:autohint=true
-urxvt.boldItalicFont: \
-    xft:iosveka-medium:style=Bold:style=Italic:pixelsize=14:autohint=true, \
-    xft:iosveka-medium:style=Bold:style=Italic:pixelsize=14:autohint=true
-
+URxvt.font: xft:Iosevka Medium:style=Regular:pixelsize=14:autohint=true
+URxvt.boldFont: xft:Iosevka:style=Bold:pixelsize=14:autohint=true
+URxvt.italicFont: xft:Iosevka:style=Italic:pixelsize=14:autohint=true
+URxvt.boldItalicFont: xft:Iosevka:style=Bold:style=Italic:pixelsize=14:autohint=true
+    
 ! Custom scrolling behaviour
-urxvt.scrollBar: False
-urxvt.scrollBar_right: False
-urxvt.scrollStyle: plain
-urxvt.scrollTtyOutput: False
-urxvt.scrollWithBuffer: True
-urxvt.scrollTtyKeypress: True
+URxvt.scrollBar: False
+URxvt.scrollBar_right: False
+URxvt.scrollStyle: plain
+URxvt.scrollTtyOutput: False
+URxvt.scrollWithBuffer: True
+URxvt.scrollTtyKeypress: True
 
-urxvt.saveLines: 120000
+URxvt.saveLines: 120000
 
 ! Settings for urxvt-perl-extensions.
-urxvt.perl-ext: default,matcher
-urxvt.matcher.button: 2
-urxvt.matcher.rend.0: Uline fg9
-urxvt.url-launcher: firefox
-urxvt.searchable-scrollback: M-Tab
+URxvt.perl-ext: default,matcher, url-select
+URxvt.matcher.button: 2
+URxvt.matcher.rend.0: Uline fg9
+URxvt.url-launcher: firefox
+URxvt.searchable-scrollback: M-Tab
 
-urxvt.keysym.M-g: perl:matcher
-urxvt.keysym.M-l: perl:matcher:list
+URxvt.keysym.M-g: perl:matcher
+URxvt.keysym.M-l: perl:matcher:list
 
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
  
@@ -93,3 +85,4 @@ URxvt.perl-ext-common: default,clipboard,resize-font,fullscreen
 ! URxvt.keysym.C-Up:    resize-font:bigger
 
 URxvt.keysym.F11: perl:fullscreen:switch
+

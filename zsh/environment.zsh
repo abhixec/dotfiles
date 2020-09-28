@@ -23,3 +23,5 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # Export ZDOTDIR
 #export ZDOTDIR="$HOME/.zsh"
+# Add Ledger File
+LEDGER_FILE=~/.finance/2020.journal

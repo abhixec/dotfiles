@@ -22,3 +22,12 @@ else
 fi
 }
 
+
+#Update git repositories
+updateRepos(){
+    for i in $(ls); do
+	pushd $i;
+	git pull;
+	popd;
+    done
+}

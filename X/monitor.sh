@@ -10,6 +10,7 @@ display_option=$(xrandr -q | grep VIRTUAL3 | head -n 2 | sed -n 2p| awk '{$1=$1}
 if [ $is_connected == "connected" ]; then
 #sh ~/.screenlayout/layout.sh
 xrandr --output VIRTUAL3 --mode $display_option --right-of eDP1
+nitrogen --set-scaled ~/Downloads/images/anime_wallpaper_by_icetremens_dbmb9ay.jpg --save
 elif [ $is_connected == "disconnected" ]; then
 xrandr --auto
 fi
