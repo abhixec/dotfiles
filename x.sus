@@ -1,5 +1,5 @@
 card installX {
     into ~
-    X/Xdefaults -> .Xresources
+    X/Xdefaults -> .Xdefaults
     X/xinitrc -> .xinitrc
 }

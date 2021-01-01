@@ -10,6 +10,7 @@ import XMonad.Prompt.AppendFile
 import XMonad.Prompt.Window
 import XMonad.Prompt.RunOrRaise
 import XMonad.Prompt.FuzzyMatch
+import XMonad.Prompt.Input
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Util.Run
@@ -34,6 +35,9 @@ import XMonad.Layout.Reflect (reflectVert)
 import XMonad.Layout.TwoPane (TwoPane(..))
 import XMonad.Layout.Master (mastered)
 import XMonad.Layout.Spacing (Border(..), spacingRaw)
+import XMonad.Layout.CenteredMaster
+import XMonad.Layout.SimplestFloat
+import XMonad.Layout.Grid
 import XMonad.Layout.CenteredMaster
 
 -- Actions
@@ -61,6 +65,7 @@ import XMonad.Util.NamedScratchpad
 import Data.Time.Format
 import Data.Time.LocalTime
 import Data.List
+import Data.Char (isSpace)
 
 -- Global Variables
 myTerminal           = "urxvtc"
@@ -75,13 +80,50 @@ altMask              = mod1Mask
 launcherString = "rofi -combi-modi window,drun,ssh,run -show combi -modi combi -show drun -show-icons -drun-icon-theme -matching fuzzy -theme android_notification"
 --Scratchpads
 scratchpads = [
-               NS "emacs" "emacsclient -nc --frame-parameters='(quote (name . \"floatingemacs\"))'" (title =? "floatingemacs") defaultFloating,
-               NS "terminal" "urxvtc -title 'floatingterm'" (title =? "floatingterm") defaultFloating
+               NS "emacs" "emacsclient -nc --frame-parameters='(quote (name . \"floatingemacs\"))'" (title =? "floatingemacs") (customFloating $ W.RationalRect (2/6) (2/6) (1/4) (1/3)),
+               NS "terminal" "urxvtc -title 'floatingterm' -e tmux" (title =? "floatingterm") defaultFloating
               ] 
+
+dtXPConfig :: XPConfig
+dtXPConfig = def
+      { font                = "xft:Iosevka Medium:regular:size=10:antialias=true:hinting=true"
+      , bgColor             = "#282c34"
+      , fgColor             = "#bbc2cf"
+      , bgHLight            = "#c792ea"
+      , fgHLight            = "#000000"
+      , borderColor         = "#535974"
+      , promptBorderWidth   = 0
+      , position            = Top
+--    , position            = CenteredAt { xpCenterY = 0.3, xpWidth = 0.3 }
+      , height              = 20
+      , historySize         = 256
+      , historyFilter       = id
+      , defaultText         = []
+      , autoComplete        = Just 100000  -- set Just 100000 for .1 sec
+      , showCompletionOnTab = False
+      -- , searchPredicate     = isPrefixOf
+      , searchPredicate     = fuzzyMatch
+      , alwaysHighlight     = True
+      , maxComplRows        = Nothing      -- set to Just 5 for 5 rows
+      }
+
+dtXPConfig' :: XPConfig
+dtXPConfig' = dtXPConfig
+      { autoComplete        = Nothing
+      }
+
+calcPrompt c ans =
+    inputPrompt c (trim ans) ?+ \input ->
+        liftIO(runProcessWithInput "qalc" [input] "") >>= calcPrompt c
+    where
+        trim  = f . f
+            where f = reverse . dropWhile isSpace
+
 
 -- My Key Combination
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ 
        [ ((modm .|. controlMask, xK_x), shellPrompt myXPConfig)
+       , ((modm .|. shiftMask, xK_p)  , calcPrompt dtXPConfig' "qalc")
        , ((modm, xK_F3               ), xmonadPrompt myXPConfig)
        , ((modm, xK_c                ), spawn $ XMonad.terminal conf)
        , ((0   , xK_Print            ), spawn "scrot")
@@ -107,10 +149,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
        , ((modm .|. shiftMask, xK_m     ), withLastMinimized maximizeWindow)
        , ((modm .|. shiftMask, xK_n     ), clearBoring)
        , ((modm, xK_b     )              , markBoring)
-       , ((modm,               xK_i     ), focusDown)
-       , ((modm,               xK_e     ), focusUp  )
-       , ((modm .|. shiftMask, xK_e     ), windows W.swapUp   )
-       , ((modm .|. shiftMask, xK_i     ), windows W.swapDown )
+       , ((modm,               xK_e     ), focusDown)
+       , ((modm,               xK_i     ), focusUp  )
+       , ((modm .|. shiftMask, xK_i     ), windows W.swapUp   )
+       , ((modm .|. shiftMask, xK_e     ), windows W.swapDown )
        , ((modm .|. shiftMask, xK_Return), focusMaster)
        , ((modm, xK_grave), toggleWS' ["NSP"])
        , ((modm, xK_slash)          , warpToWindow 0.98 0.98)
@@ -150,7 +192,7 @@ floatOrNot f n = withFocused $ \windowId -> do
                              floats <- gets (W.floating . windowset);
                              if windowId `M.member` floats -- if the current window is floating...
                                then f
-			       else n
+                               else n
 
 -- Get the windows in the current workspace
 windowCount :: X String
@@ -190,15 +232,16 @@ myManageHook = composeAll
     ]
 
 -- Layouts
-myLayouts = avoidStruts $ maximize $ minimize $ boringWindows $ fullscreenFull ( myTile ||| Mirror myTile ||| Full ||| focused ||| ThreeColMid 1 (3/100) (1/2) ||| simpleTabbed ||| TwoPane(3/100)(1/2))
+myLayouts = avoidStruts $ maximize $ minimize $ boringWindows $ fullscreenFull ( myTile ||| Mirror myTile ||| Full ||| focused ||| ThreeColMid 1 (3/100) (1/2) ||| simpleTabbed ||| TwoPane(15/100) (55/100) ||| simplestFloat )
   where
-      uniformBorder n = Border n n n n
-      spacing = spacingRaw False (uniformBorder 0) False (uniformBorder 10) True
---      twoCols    = spacing $ mastered (1/100) (1/2) Accordion
+     -- uniformBorder n = Border n n n n
+     -- spacing = spacingRaw False (uniformBorder 0) False (uniformBorder 10) True
+     -- twoCols = spacing $ mastered (1/100) (1/2) Accordion
 
       myTile = ResizableTall 1 (3/100) (1/2) []
       focused = gaps [(L,385), (R,385),(U,0),(D,10)]
                                          $ noBorders (FS.fullscreenFull Full)
+
 
 -- Configuration
 main = do

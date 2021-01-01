@@ -29,11 +29,11 @@ xss-lock -- slock &
 systemctl --user import-environment DISPLAY
 
 # Start pulse audio
-#pulseaudio -D
+pulseaudio -D
 
 #x-on-resize
-#x-on-resize --config ~/.monitor_script.sh --start &
+x-on-resize --config ~/.monitor_script.sh --start &
 # Start my favorite WM
-xmonad
+xmonad 
 #exec startxfce4
 #exec startplasma-x11

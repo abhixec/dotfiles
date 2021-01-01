@@ -28,9 +28,9 @@
  '(custom-safe-themes
    '("d548ac4bb4c8c0ba8f22476f5afcea11b7f1754065eefb118e1324f8a74883fb" "b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" "4aa183d57d30044180d5be743c9bd5bf1dde686859b1ba607b2eea26fe63f491" default))
  '(markdown-command "/usr/local/bin/pandoc")
- '(org-agenda-files (quote ("~/.notes/scratch" "~/.notes/tasks.org")))
+ '(org-agenda-files '("~/.notes/scratch" "~/.notes/tasks.org"))
  '(package-selected-packages
-   '(easy-hugo flucui-themes mmm-mode pdf-tools night-owl-theme dracula-theme nord-theme yafolding json-mode magit org-web-tools desktop-registry try ledger-mode org-journal easy-kill markdown-mode)))
+   '(clmemo easy-hugo flucui-themes mmm-mode pdf-tools night-owl-theme dracula-theme nord-theme yafolding json-mode magit org-web-tools desktop-registry try ledger-mode org-journal easy-kill markdown-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -120,6 +120,7 @@ e.g. Sunday, September 17, 2000."
      "\ntags: " (message "%s" (read-string "Tags"))
      "\ndescription: " (message "%s" (read-string "Description"))
      "\ncategories: " (message "%s" (read-string "Category"))
+     "\ndraft: " (message "%s" (read-string "Draft"))
      "\n"
      "---")))
   )
